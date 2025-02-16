@@ -1,0 +1,42 @@
+// Event listener for when the chat overlay is loaded
+document.addEventListener('onLoad', function (obj) {
+  console.log('Chat overlay loaded'); // Log when the overlay has loaded
+});
+
+// Event listener for when a new event is received (e.g., a new chat message)
+document.addEventListener('onEventReceived', function (obj) {
+  const event = obj.detail.event;  // Get the event object from the incoming message
+  console.log('Event received:', event); // Log the received event for debugging
+
+  // Define the color palette for message text
+  const colors = ['#ac99ac', '#94ae89', '#a6c5da', '#ebd29c', '#ede3e4'];
+
+  // Randomly select a color for the message text from the color palette
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+  // Get the HTML template for a chat message
+  const template = document.getElementById('chatlist_item').innerHTML;
+
+  // Replace placeholders in the template with actual data from the event object
+  const chatMessageHTML = template
+    .replace('{from}', event.from)                       // Replace with the username
+    .replace('{messageId}', event.messageId)             // Replace with the unique message ID
+    .replace('{message}', event.message)                 // Replace with the actual message text
+    .replace('{color}', event.color || '#3c2f2f')        // Replace with the user's color (or default dark brown)
+    .replace('{messageColor}', randomColor);             // Replace with the random color for the message text
+
+  // Get the chat log container where the messages will be appended
+  const logContainer = document.getElementById('log');
+  
+  console.log('Appending message to chat:', chatMessageHTML); // Log the new message for debugging
+  
+  // Append the newly created chat message HTML to the log container
+  logContainer.innerHTML += chatMessageHTML;
+
+  // Log the current scroll height and scroll position for debugging purposes
+  console.log('Log container height:', logContainer.scrollHeight);
+  console.log('Log container scrollTop:', logContainer.scrollTop);
+
+  // Scroll to the bottom of the log container to keep the latest message in view
+  logContainer.scrollTop = logContainer.scrollHeight;
+});
