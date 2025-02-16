@@ -1,0 +1,23 @@
+<!-- Container for displaying chat logs -->
+<div id="log" class="sl__chat__layout"></div>
+
+<!-- Template for an individual chat message item -->
+<script type="text/template" id="chatlist_item">
+  <!-- Wrapper div for each chat message -->
+  <div data-from="{from}" data-id="{messageId}">
+    
+    <!-- Display the username of the sender, dynamically injected -->
+    <span class="name">{from}</span> <!-- Username above the message -->
+    
+    <!-- Meta information for the message, such as badges or status, with dynamic color -->
+    <span class="meta" style="color: {color}">
+      <span class="badges"></span> <!-- Placeholder for badges (e.g., admin, VIP) -->
+    </span>
+    
+    <!-- Line break between username/meta and the actual message -->
+    <br>
+    
+    <!-- Display the actual message with a dynamic color for the text -->
+    <span class="message" style="color: {messageColor}">{message}</span> <!-- Message with dynamic color -->
+  </div>
+</script>
