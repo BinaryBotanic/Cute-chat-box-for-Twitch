@@ -1,0 +1,107 @@
+/* Importing the "Dekko" font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dekko&display=swap');
+
+/* Universal selector to apply box-sizing: border-box globally to all elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Setting the height to 100% for both html and body, and preventing scrolling */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Applying the imported "Dekko" font family to the body and disabling overflow */
+body {
+  font-family: 'Dekko', cursive;
+  overflow: hidden;
+}
+
+/* Styling for the chat log container */
+#log {
+    display: flex; /* Flexbox layout for arranging children elements vertically */
+    flex-direction: column; /* Stacking child elements vertically */
+    position: absolute; /* Positioning it at the bottom of the screen */
+    bottom: 0; /* Align to the bottom */
+    left: 0; /* Align to the left */
+    padding: 10px; /* Adding padding inside the container */
+    width: 100%; /* Full width */
+    gap: 15px; /* Spacing between child elements */
+}
+
+/* Hiding the scrollbar in Webkit browsers (Chrome, Safari) */
+#log::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Styling each individual chat message inside the log */
+#log>div {
+  border-radius: 30px; /* Rounded corners for the chat bubble */
+  padding: 12px 15px; /* Padding inside each chat message */
+  box-shadow: 0 4px 8px rgba(120, 111, 102, 0.2); /* Soft shadow for depth */
+  
+  /* Applying animations for fade-in, fade-out, and color shifting */
+  animation: fadeInRight .5s ease forwards, fadeOut 0.5s ease {message_hide_delay} forwards, colorShift 15s infinite alternate;
+  
+  /* Smooth transition effect for background color change */
+  transition: background-color 0.3s ease;
+}
+
+/* Keyframes for the colorShift animation to change the background color over time */
+@keyframes colorShift {
+  0% { background-color: rgba(172, 153, 172, 0.6); }
+  25% { background-color: rgba(148, 174, 137, 0.6); }
+  50% { background-color: rgba(235, 210, 156, 0,6); }
+  75% { background-color: rgba(166, 197, 218, 0.6); }
+  100% { background-color: rgba(237, 227, 228, 0.6); }
+}
+
+/* Styling for images used as emotes in the chat log */
+#log .emote img {
+  height: 1.6em; /* Emote height */
+  margin-right: 5px; /* Spacing to the right of the emote */
+}
+
+/* Styling for meta information like badges or status */
+#log .meta {
+  color: #1E3231; /* Soft brown color for meta text */
+  font-size: 25px; /* Larger font for meta text */
+  margin-bottom: 5px; /* Space below the meta text */
+  font-weight: bold; /* Bold font for emphasis */
+}
+
+/* Styling for the chat message text */
+#log .message {
+  font-size: 35px; /* Larger font size for the main message */
+  color: #0F1020; /* Dark gray color for the message */
+}
+
+/* Styling for the badges (e.g., VIP, moderator) next to user names */
+.badge {
+  margin-right: 0.3em; /* Space between badges */
+  height: 1.2em; /* Badge height */
+}
+
+/* Styling for the username */
+.name {
+  margin-left: 0.3em; /* Small space to the left of the username */
+  font-size: 30px; /* Larger font for the username */
+  font-weight: bold; /* Bold username */
+  color: #0F1020; /* Dark color for the username */
+  text-decoration-line: underline; /* Underlined username */
+  text-decoration-style: dotted; /* Dotted underline style */
+  text-transform: uppercase; /* Making the username uppercase */
+}
+
+/* Keyframes for fade-in animation (for the incoming message) */
+@keyframes fadeInRight {
+  0% {opacity: 0; transform: translateX(20px);} /* Start off transparent and slightly moved to the right */
+  100% {opacity: 1; transform: translateX(0);} /* End with full opacity and in the correct position */
+}
+
+/* Keyframes for fade-out animation (for the outgoing message) */
+@keyframes fadeOut {
+  0% {opacity: 1;} /* Start with full opacity */
+  100% {opacity: 0;} /* End with no opacity (fade out) */
+}
